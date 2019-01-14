@@ -4,13 +4,22 @@ from .models import Post
 from .forms import PostForm
 
 def post_list(request):
-	posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-	return render(request, 'blog/post_list.html', {'posts':posts})
+	# posts = Post.objects.filter(publish__lte=timezone.now()).order_by('publish')
+	posts = Post.published.all()
+	# return render(request, 'blog/post_list.html', {'posts':posts})
+	return render(request, 'blog/post/list.html', {'posts': posts})
 
-def post_detail(request, pk):
+# def post_detail(request, pk):
+def post_detail(request, year, month, day, post):
 	# Post.objects.get(pk=pk)
-	post = get_object_or_404(Post, pk=pk)
-	return render(request, 'blog/post_detail.html', {'post':post})
+	# post = get_object_or_404(Post, pk=pk)
+	post = get_object_or_404(Post, slug = post,
+									status = 'published',
+									publish__year = year,
+									publish__month = month,
+									publish__day = day)
+	# return render(request, 'blog/post_detail.html', {'post':post})
+	return render(request, 'blog/post/detail.html', {'post':post})
 
 def post_new(request):
 	if request.method == 'POST':
@@ -40,12 +49,13 @@ def post_edit(request, pk):
     return render(request, 'blog/post_edit.html', {'form': form})
 
 def post_draft_list(request):
-	posts = Post.objects.filter(published_date__isnull=True).order_by('created_date')
+	# posts = Post.objects.filter(published_date__isnull=True).order_by('created_date')
+	posts = Post.objects.filter(publish__isnull=True).order_by('created')
 	return render(request, 'blog/post_draft_list.html', {'posts': posts})
 
 def post_publish(request, pk):
 	post = get_object_or_404(Post, pk=pk)
-	post.publish()
+	post._publish()
 	return redirect('post_detail', pk=pk)
 
 def post_remove(request, pk):
