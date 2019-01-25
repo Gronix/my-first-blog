@@ -1,26 +1,110 @@
-.page-header {
-    background-color: #4b2694;
-    margin-top: 0;
-    padding: 20px 20px 20px 40px;
-}
-
-.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
-    color: #ffffff;
-    font-size: 36pt;
-    text-decoration: none;
-}
-
-.content {
-    margin-left: 40px;
+body {
+    margin: 0;
 }
 
 h1, h2, h3, h4 {
     font-family: 'Lobster', cursive;
 }
 
+header {
+    background-color: #683bc1;
+    margin-top: 0;
+    padding: 10px 20px 30px 40px;
+    box-shadow: 0px -10px 15px -7px rgba(0,0,0,0.5) inset;
+}
+
+header h1, header h1 a, header h1 a:visited, header h1 a:active {
+    color: #ffffff;
+    font-size: 36pt;
+    text-decoration: none;
+    text-shadow: 3px 3px 10px #200c46;
+}
+
+aside {
+    width: 30%;
+    min-height: 300px;
+    float: right;
+    background: #0d53bb8c;
+    padding: 0px 10px 10px 30px;
+    border-left: 1px #969696d1 solid;
+    border-bottom: 1px #969696d1 solid;
+}
+
+aside h1, aside h2, aside h3, aside p{
+    color: #051227;
+}
+
+.triangle {
+    display: inline-block;
+}
+
+.tr-top-left {
+    width: 0;
+    height: 0;
+    padding-bottom: 10%;
+    padding-left: 10%;
+    /*overflow: hidden;*/
+}
+
+.tr-top-left:after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    margin-left: -500px;
+    border-bottom: 500px solid transparent;
+    border-left: 500px solid #4679BD;
+}
+
+.tr-top-right {
+    width: 0;
+    height: 0;
+    padding-left:10%;
+    padding-top: 10%;
+    /*overflow: hidden;*/
+}
+
+.tr-top-right:after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    margin-left:-500px;
+    margin-top:-500px;
+    
+    border-left: 500px solid transparent;
+    border-top: 500px solid #4679BD;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding-top: 15px;
+    text-align: center;
+    background: #683bc1;
+    box-shadow: 0px 10px 15px -7px rgba(0,0,0,0.5) inset;
+}
+
+footer p {
+    font-size: 9pt;
+    color: #C0B6E6;
+}
+
+#content {
+    display: inline-block;
+    width: 70%;
+    padding-left: 40px;
+}
+
+#main {
+}
+
 .date {
+    font-size: 9pt;
+    font-style: italic; 
     color: #828282;
-}""
+}
 
 .save {
     float: right;
