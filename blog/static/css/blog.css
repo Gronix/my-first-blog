@@ -1,13 +1,186 @@
-body {
+:root{
+    --center-width: 800px;
+    --main-bg-color: #fff;
+    --base-color: #683bc1;
+    --sidebar-bg-color: #81a3db;
+    --sidebar-gradient-top-color: #94bcfb;
+}
+
+* {
+    padding: 0;
     margin: 0;
+}
+
+html, body{
+    height: 100%
+}
+
+body {
+    background-color: var(--base-color);
+    display: grid;
+    grid-template-columns: auto 800px auto;
+    grid-template-rows: 200px auto 50px;
+}
+
+.base-color {
+    background-color: var(--base-color);
+}
+
+.main-color {
+    background-color: var(--main-bg-color);
+}
+
+.header {
+    grid-row: 1;
+    grid-column: 2 / 3;
 }
 
 h1, h2, h3, h4 {
     font-family: 'Lobster', cursive;
 }
 
+.header h1 {
+    margin-top: 50px;
+}
+
+.header h1 a, .header h1 a:visited, .header h1 a:active {
+    color: #ffffff;
+    font-size: 56pt;
+    text-decoration: none;
+    text-shadow: 3px 3px 10px #200c46;
+}
+
+.main {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    background-color: #fff;
+    display: grid;
+    grid-template-columns: auto 600px 80px 200px auto;
+    grid-template-rows: 100%;
+    box-shadow: 0px 0px 40px 2px rgba(0,0,0,0.5);
+    z-index: 10;
+}
+
+.content {
+    grid-row: 1;
+    grid-column: 2 / 3;
+    display: flex;
+    flex-direction: column;
+}
+
+.date {
+    font-size: 9pt;
+    font-style: italic; 
+    color: #828282;
+}
+
+.sidebar {
+    min-height: 300px;
+    background-color: var(--sidebar-bg-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-wrap{
+    grid-row: 1;
+    grid-column: 4 / 5;
+}
+
+.sidebar-text {
+    margin: 0 auto;
+}
+
+.sidebar-top-gradient {
+    width: 100%;
+    height: 30px;
+    background: linear-gradient(to top,
+                 var(--sidebar-bg-color),
+                 var(--sidebar-gradient-top-color))
+}
+
+
+.sidebar h1, .sidebar h2, .sidebar h3 {
+    font-size: 24pt;
+    color: #3b509c;
+    text-shadow: 1px 1px 0px #b0c2e0;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.sidebar p, .sidebar a, .sidebar a:visited, .sidebar a:active{
+    color: #051227;
+    word-break: break-all;
+}
+
+.triangle {
+    display: inline-block;
+}
+
+.tr-top-left {
+    width: 0;
+    height: 0;
+    float: left;
+    padding-bottom: 50%;
+    padding-left: 50%;
+    overflow: hidden;
+}
+
+.tr-top-left:after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    margin-left: -500px;
+    border-bottom: 500px solid transparent;
+    border-left: 500px solid var(--sidebar-bg-color);
+}
+
+.tr-top-right {
+    width: 0;
+    height: 0;
+    padding-left: 50%;
+    padding-top: 50%;
+    overflow: hidden;
+}
+
+.tr-top-right:after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    margin-left:-500px;
+    margin-top:-500px;
+    
+    border-left: 500px solid transparent;
+    border-top: 500px solid var(--sidebar-bg-color);
+}
+
+.footer {
+    grid-row: 3;
+    grid-column: 2 / 3;
+    padding-top: 20px; 
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    /*background-color: var(--main-bg-color);*/
+}
+
+.copyrights {
+    /*background-color: var(--main-bg-color);*/
+}
+
+/*
+.main {
+    min-height: 800px;
+}
+
+
+h1, h2, h3, h4 {
+    font-family: 'Lobster', cursive;
+}
+
 header {
-    background-color: #683bc1;
+    background-color: var(--main-bg-color);
     margin-top: 0;
     padding: 10px 20px 30px 40px;
     box-shadow: 0px -10px 15px -7px rgba(0,0,0,0.5) inset;
@@ -20,17 +193,28 @@ header h1, header h1 a, header h1 a:visited, header h1 a:active {
     text-shadow: 3px 3px 10px #200c46;
 }
 
-aside {
-    width: 30%;
-    min-height: 300px;
+sidebar {
+    width: 16%;
     float: right;
-    background: #0d53bb8c;
-    padding: 0px 10px 10px 30px;
-    border-left: 1px #969696d1 solid;
-    border-bottom: 1px #969696d1 solid;
+    margin-right: 3%;
 }
 
-aside h1, aside h2, aside h3, aside p{
+.sidebar-top-gradient {
+    width: 100%;
+    height: 30px;
+    background: linear-gradient(to top,
+                 var(--sidebar-bg-color),
+                 var(--sidebar-gradient-top-color))
+}
+
+.sidebar-text {
+    min-height: 200px;
+    padding: 1px 10px 10px 30px;
+    background: var(--sidebar-bg-color);
+    border-left: 1px #969696d1 solid;
+}
+
+sidebar h1, sidebar h2, sidebar h3, sidebar p{
     color: #051227;
 }
 
@@ -41,9 +225,10 @@ aside h1, aside h2, aside h3, aside p{
 .tr-top-left {
     width: 0;
     height: 0;
-    padding-bottom: 10%;
-    padding-left: 10%;
-    /*overflow: hidden;*/
+    float: left;
+    padding-bottom: 50%;
+    padding-left: 50%;
+    overflow: hidden;
 }
 
 .tr-top-left:after {
@@ -53,15 +238,15 @@ aside h1, aside h2, aside h3, aside p{
     height: 0;
     margin-left: -500px;
     border-bottom: 500px solid transparent;
-    border-left: 500px solid #4679BD;
+    border-left: 500px solid var(--sidebar-bg-color);
 }
 
 .tr-top-right {
     width: 0;
     height: 0;
-    padding-left:10%;
-    padding-top: 10%;
-    /*overflow: hidden;*/
+    padding-left: 50%;
+    padding-top: 50%;
+    overflow: hidden;
 }
 
 .tr-top-right:after {
@@ -73,37 +258,14 @@ aside h1, aside h2, aside h3, aside p{
     margin-top:-500px;
     
     border-left: 500px solid transparent;
-    border-top: 500px solid #4679BD;
+    border-top: 500px solid var(--sidebar-bg-color);
 }
 
-footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    padding-top: 15px;
-    text-align: center;
-    background: #683bc1;
-    box-shadow: 0px 10px 15px -7px rgba(0,0,0,0.5) inset;
-}
-
-footer p {
-    font-size: 9pt;
-    color: #C0B6E6;
-}
-
-#content {
+.content {
     display: inline-block;
-    width: 70%;
+    width: 76%;
     padding-left: 40px;
-}
-
-#main {
-}
-
-.date {
-    font-size: 9pt;
-    font-style: italic; 
-    color: #828282;
+    margin-right: : 4%;
 }
 
 .save {
@@ -132,3 +294,18 @@ footer p {
 a, a:visited {
     color: #000000;
 }
+
+footer {
+    position: ;
+    bottom: 0;
+    width: 100%;
+    padding-top: 15px;
+    text-align: center;
+    background: var(--main-bg-color);
+    box-shadow: 0px 10px 15px -7px rgba(0,0,0,0.5) inset;
+}
+
+footer p {
+    font-size: 9pt;
+    color: #C0B6E6;
+}*/

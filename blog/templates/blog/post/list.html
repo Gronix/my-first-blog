@@ -2,16 +2,31 @@
 
 {% block title %}My Blog{% endblock %}
 
+{% block sidebar-title %}My Blog{% endblock %}
+
 {% block content %}
 	{% for post in posts %}
-		<h2>
+		<article>
+			<h2>
+				<a href="{{ post.get_absolute_url }}">
+					{{ post.title }}
+				</a>
+			</h2>
+			<p class="date">
+				Published {{ post.publish }} by {{ post.author }}
+			</p>
+			{{ post.body | truncatewords:30 | linebreaks }}
+		</article>
+	{% endfor %}
+	{% include "paginator.html" with page=posts %}
+{% endblock %}
+
+{% block sidebar-text %}
+	{% for post in posts %}
+		<p>
 			<a href="{{ post.get_absolute_url }}">
 				{{ post.title }}
 			</a>
-		</h2>
-		<p class="date">
-			Published {{ post.publish }} by {{ post.author }}
 		</p>
-		{{ post.body | truncatewords:30 | linebreaks }}
 	{% endfor %}
 {% endblock %}

@@ -1,0 +1,26 @@
+<div class="sidebar">
+    <div class="sidebar-top-gradient"></div>
+    <h3>{{ sidebar-title }}</h3>
+    <div class="sidebar-text">
+        {% if sidebar-text not is None %}
+            {% for item in sidebar-text %}
+                {{ item }}
+            {% endfor %}
+        {% else %}
+            <p>This is my blog.</p>
+        {% endif %}
+    </div>
+</div>
+<div class="triangle tr-top-left"></div>
+<div class="triangle tr-top-right"></div>
+
+
+{% block sidebar-text %}
+    {% for post in posts %}
+        <p>
+            <a href="{{ post.get_absolute_url }}">
+                {{ post.title }}
+            </a>
+        </p>
+    {% endfor %}
+{% endblock %}

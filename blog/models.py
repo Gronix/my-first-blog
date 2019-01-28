@@ -10,6 +10,7 @@ class PublishedManager(models.Manager):
         return super(PublishedManager, self).get_queryset()\
                                             .filter(status='published')
 
+
 class Post(models.Model):
     # author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
@@ -32,14 +33,14 @@ class Post(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
 
     objects = models.Manager()
-    published = PublishedManager() # Custom Django's QuerySet manager
+    published = PublishedManager()  # Custom Django's QuerySet manager
 
     def get_absolute_url(self):
         return reverse('blog:post_detail',
-                        args=[self.publish.year,
-                                self.publish.month,
-                                self.publish.day,
-                                self.slug])
+                       args=[self.publish.year,
+                             self.publish.month,
+                             self.publish.day,
+                             self.slug])
 
     class Meta:
         ordering = ('-publish',)

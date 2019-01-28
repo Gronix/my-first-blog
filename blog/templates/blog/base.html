@@ -9,25 +9,34 @@
 	<link rel="stylesheet" href="{% static "css/blog.css" %}">
 </head>
 <body>
-	<header>
-		<h1>My Blog</h1>
-	</header>
-	<div id="main">
-		<div id="content">
+	<section class="header base-color">
+		<h1>
+			<a href="/">
+				My Blog
+			</a>
+		</h1>
+	</section>
+	<section class="main main-color">
+		<div class="content main-color">
 			{% block content %}
 			{% endblock %}
 		</div>
-		<aside>
-			<div id="aside-text">
-				<h3>My blog</h3>
-				<p>This is my blog.</p>
+		<aside class="sidebar-wrap main-color">
+			<div class="sidebar">
+				<div class="sidebar-top-gradient"></div>
+				<h3>{% block sidebar-title %}My Blog{% endblock %}</h3>
+				<div class="sidebar-text">
+					{% block sidebar-text %}
+					<p>This is my blog.</p>
+					{% endblock %}
+				</div>
 			</div>
 			<div class="triangle tr-top-left"></div>
 			<div class="triangle tr-top-right"></div>
 		</aside>
-	</div>
-	<footer>
-		<p>Copyrights.</p>
-	</footer>
+	</section>
+	<section class="footer base-color">
+		<p>Copyrights @ {% now "Y" %}.</p>
+	</section>
 </body>
 </html>
