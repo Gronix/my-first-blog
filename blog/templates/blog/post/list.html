@@ -1,8 +1,7 @@
 {% extends 'blog/base.html' %}
+{% load sidebar_extras %}
 
 {% block title %}My Blog{% endblock %}
-
-{% block sidebar-title %}My Blog{% endblock %}
 
 {% block content %}
 	{% for post in posts %}
@@ -21,12 +20,21 @@
 	{% include "paginator.html" with page=posts %}
 {% endblock %}
 
+{% block sidebar-title %}{{ sb_title }}{% endblock %}
+
 {% block sidebar-text %}
-	{% for post in posts %}
-		<p>
-			<a href="{{ post.get_absolute_url }}">
-				{{ post.title }}
-			</a>
+	{% if posts.has_next %}
+		{% get_another_page posts.paginator page_num 1 as next_posts %}
+        {% for post in next_posts %}
+        <p>
+            <a href="{{ post.get_absolute_url }}">
+                {{ post.title }}
+            </a>
+        </p>
+        {% endfor %}
+	{% else %}
+		<p>Nothing to see more(<br>
+			Come back later.
 		</p>
-	{% endfor %}
+	{% endif %}
 {% endblock %}

@@ -5,21 +5,35 @@ from .models import Post
 from .forms import PostForm
 
 
+def _to_int_safe(str_obj):
+    try:
+        res = int(str_obj)
+    except Exception:
+        res = str_obj
+    return res
+
+
 def post_list(request):
     # posts = Post.objects.filter(publish__lte=timezone.now()).order_by('publish')
     object_list = Post.published.all()
     paginator = Paginator(object_list, 3)  # 3 posts in each page
-    page = request.GET.get('page')
-    try:
-        posts = paginator.page(page)
-    except PageNotAnInteger:
+    page_num = _to_int_safe(request.GET.get('page'))
+    if page_num is None or not isinstance(page_num, (int,)):
         # if page is not an integer deliver the first page
-        posts = paginator.page(1)
+        page_num = 1
+    try:
+        posts = paginator.page(page_num)
     except EmptyPage:
         # if page is out of range deliver last page of results
-        posts = paginator.page(paginator.num_pages)
-    # return render(request, 'blog/post_list.html', {'posts':posts})
-    return render(request, 'blog/post/list.html', {'page': page,
+        page_num = paginator.num_pages
+        posts = paginator.page(page_num)
+    if posts.has_next():
+        sb_title = "Also see:"
+    else:
+        sb_title = "My Blog"
+
+    return render(request, 'blog/post/list.html', {'sb_title': sb_title,
+                                                   'page_num': page_num,
                                                    'posts': posts})
 
 
